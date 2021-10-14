@@ -12,8 +12,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.textField.setText(SharedPreferencesManager.instance.getString("memo"))
         binding.button.setOnClickListener {
-            // TODO 押された時を実装する
+            SharedPreferencesManager.instance.putString("memo", binding.textField.text.toString())
         }
     }
 }
