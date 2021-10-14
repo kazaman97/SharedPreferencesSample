@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SharedPreferencesSample</string>
+    <string name="memo">メモ</string>
+    <string name="save">保存</string>
+</resources>
