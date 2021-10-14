@@ -21,19 +21,46 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@id/button"
+            app:layout_constraintBottom_toTopOf="@id/button_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/button_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_field" />
+            app:layout_constraintTop_toBottomOf="@id/text_field">
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/button_spacer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Space
+                android:id="@+id/button_spacer"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toStartOf="@id/delete"
+                app:layout_constraintStart_toEndOf="@id/save" />
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/button_spacer"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
