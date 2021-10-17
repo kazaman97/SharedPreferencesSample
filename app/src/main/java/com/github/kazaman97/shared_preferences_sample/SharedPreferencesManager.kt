@@ -1,20 +1,14 @@
 package com.github.kazaman97.shared_preferences_sample
 
 import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class SharedPreferencesManager(private val context: Context) {
+class SharedPreferencesManager @Inject constructor(
+    @ApplicationContext private val context: Context
+) {
     companion object {
         private const val SP_NAME = "sample_preferences"
-        private var _instance: SharedPreferencesManager? = null
-        val instance: SharedPreferencesManager
-            get() = _instance!!
-
-        fun createInstance(context: Context): SharedPreferencesManager =
-            synchronized(this) {
-                _instance ?: SharedPreferencesManager(context).also {
-                    _instance = it
-                }
-            }
     }
 
     private val sharedPreferences

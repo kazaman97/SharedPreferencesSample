@@ -1,10 +1,7 @@
 package com.github.kazaman97.shared_preferences_sample
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class App : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        SharedPreferencesManager.createInstance(applicationContext)
-    }
-}
+@HiltAndroidApp
+class App : Application()

@@ -1,31 +1,37 @@
 package com.github.kazaman97.shared_preferences_sample
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.github.kazaman97.shared_preferences_sample.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    companion object {
-        private const val SP_KEY = "memo"
-    }
-
     private val binding: ActivityMainBinding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
-
-    private val sharedPreferencesManager: SharedPreferencesManager
-        get() = SharedPreferencesManager.instance
+    private val viewModel: MainViewModel by viewModels()
+    private var memo: String = ""
+        get() = binding.textField.text.toString()
+        set(value) {
+            binding.textField.setText(value)
+            field = value
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.textField.setText(sharedPreferencesManager.getString(SP_KEY))
+        viewModel.memo.observe(this) {
+            memo = it
+        }
         binding.save.setOnClickListener {
-            sharedPreferencesManager.putString(SP_KEY, binding.textField.text.toString())
+            viewModel.setMemo(memo)
         }
         binding.delete.setOnClickListener {
-            sharedPreferencesManager.removeString(SP_KEY)
-            binding.textField.setText("")
+            viewModel.removeMemo()
+            memo = ""
         }
+        viewModel.getMemo()
     }
 }
