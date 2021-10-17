@@ -2,5 +2,6 @@
     <string name="app_name">SharedPreferencesSample</string>
     <string name="memo">メモ</string>
     <string name="save">保存</string>
+    <string name="encrypted_save">暗号化して保存</string>
     <string name="delete">削除</string>
 </resources>

@@ -13,25 +13,11 @@ class MainActivity : AppCompatActivity() {
         DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
     private val viewModel: MainViewModel by viewModels()
-    private var memo: String = ""
-        get() = binding.textField.text.toString()
-        set(value) {
-            binding.textField.setText(value)
-            field = value
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.memo.observe(this) {
-            memo = it
-        }
-        binding.save.setOnClickListener {
-            viewModel.setMemo(memo)
-        }
-        binding.delete.setOnClickListener {
-            viewModel.removeMemo()
-            memo = ""
-        }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         viewModel.getMemo()
     }
 }

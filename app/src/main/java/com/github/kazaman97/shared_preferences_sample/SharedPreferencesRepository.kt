@@ -7,9 +7,14 @@ class SharedPreferencesRepository @Inject constructor(
 ) {
     fun putString(
         key: String,
-        value: String
+        value: String,
+        isEncrypted: Boolean = false
     ) {
-        sharedPreferencesManager.putString(key, value)
+        sharedPreferencesManager.putString(
+            key = key,
+            value = value,
+            isEncrypted = isEncrypted
+        )
     }
 
     fun removeString(key: String) {
@@ -19,5 +24,8 @@ class SharedPreferencesRepository @Inject constructor(
     fun getString(
         key: String,
         default: String = ""
-    ): String = sharedPreferencesManager.getString(key)
+    ): String = sharedPreferencesManager.getString(
+        key = key,
+        defaultValue = default
+    )
 }

@@ -1,6 +1,5 @@
 package com.github.kazaman97.shared_preferences_sample
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,18 +13,29 @@ class MainViewModel @Inject constructor(
         private const val MEMO = "memo"
     }
 
-    private val _memo = MutableLiveData<String>()
-    val memo: LiveData<String> = _memo
+    val memoText = MutableLiveData("")
 
     fun getMemo() {
-        _memo.value = sharedPreferencesRepository.getString(MEMO)
+        memoText.value = sharedPreferencesRepository.getString(MEMO)
     }
 
-    fun setMemo(memo: String) {
-        sharedPreferencesRepository.putString(MEMO, memo)
+    fun putMemo() {
+        sharedPreferencesRepository.putString(
+            key = MEMO,
+            value = memoText.value!!
+        )
+    }
+
+    fun putEncryptedMemo() {
+        sharedPreferencesRepository.putString(
+            key = MEMO,
+            value = memoText.value!!,
+            isEncrypted = true
+        )
     }
 
     fun removeMemo() {
         sharedPreferencesRepository.removeString(MEMO)
+        memoText.value = ""
     }
 }
